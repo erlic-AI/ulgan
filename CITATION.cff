@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this research prototype, please cite the repository and version you used."
+title: "ulgan: compact adaptive-computation research"
+type: software
+version: 0.4.0
+abstract: "An independent research prototype exploring task-conditioned recurrent models and learned adaptive computation on synthetic binary-sequence tasks."
+authors:
+  - name: "Erlic AI"

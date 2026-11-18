@@ -1,0 +1,69 @@
+{
+  "device": "cpu",
+  "parameters": 5426,
+  "history": [
+    {
+      "loss": 0.7354267701506615,
+      "accuracy": 0.52744140625,
+      "halt_token_accuracy": 0.9471597790718078
+    },
+    {
+      "loss": 0.6600370563566684,
+      "accuracy": 0.559375,
+      "halt_token_accuracy": 1.0
+    },
+    {
+      "loss": 0.4068878090940416,
+      "accuracy": 0.7671875,
+      "halt_token_accuracy": 1.0
+    },
+    {
+      "loss": 0.007157518825260922,
+      "accuracy": 1.0,
+      "halt_token_accuracy": 1.0
+    },
+    {
+      "loss": 0.0031413884222274645,
+      "accuracy": 1.0,
+      "halt_token_accuracy": 1.0
+    },
+    {
+      "loss": 0.0020634783519199117,
+      "accuracy": 1.0,
+      "halt_token_accuracy": 1.0
+    }
+  ],
+  "test_seen_lengths": {
+    "n": 2000,
+    "length_range": [
+      1,
+      12
+    ],
+    "accuracy": 1.0,
+    "halt_rate": 1.0,
+    "correct_halt_rate": 1.0,
+    "premature_halt_rate": 0.0,
+    "missing_halt_rate": 0.0,
+    "mean_steps": 7.589000225067139
+  },
+  "test_unseen_lengths": {
+    "n": 2000,
+    "length_range": [
+      13,
+      20
+    ],
+    "accuracy": 1.0,
+    "halt_rate": 1.0,
+    "correct_halt_rate": 1.0,
+    "premature_halt_rate": 0.0,
+    "missing_halt_rate": 0.0,
+    "mean_steps": 17.552499771118164
+  },
+  "training_examples_presented": 61440,
+  "train_sequence_length_range": [
+    1,
+    12
+  ],
+  "checkpoint_bytes": 26293,
+  "parameter_payload_bytes_fp32": 21704
+}
