@@ -9,7 +9,7 @@
 [Hugging Face](https://huggingface.co/erlic/ulgan-1) ·
 [Releases](https://github.com/erlic-AI/ulgan/releases)
 
-**ULGAN 1.0.0 — First public release**
+**ULGAN 1.0 — First public release**
 
 </div>
 
