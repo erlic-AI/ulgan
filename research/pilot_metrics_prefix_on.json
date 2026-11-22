@@ -1,0 +1,345 @@
+{
+  "name": "ulgan 1",
+  "seeds": [
+    11,
+    23,
+    42
+  ],
+  "settings": {
+    "seeds": [
+      11,
+      23,
+      42
+    ],
+    "epochs": 2,
+    "steps_per_epoch": 10,
+    "batch_size": 32,
+    "train_max_length": 128,
+    "eval_samples": 256,
+    "ponder_weight": 0.0005,
+    "prefix_weight": 0.25,
+    "disable_prefix_supervision": false,
+    "out": "/mnt/data/ulgan_1_runs/pilot"
+  },
+  "aggregate": {
+    "adaptive_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.7000868055555555,
+        "std": 0.02900851529775514
+      },
+      "parity": {
+        "mean": 0.4947916666666667,
+        "std": 0.08702554589326535
+      },
+      "majority": {
+        "mean": 0.60546875,
+        "std": 0.0
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 3.0985243055555554,
+        "std": 0.15390125602914848
+      }
+    },
+    "fixed12_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.6666666666666666,
+        "std": 0.01761425684696443
+      },
+      "parity": {
+        "mean": 0.4765625,
+        "std": 0.0546875
+      },
+      "majority": {
+        "mean": 0.5247395833333334,
+        "std": 0.0566518487442893
+      },
+      "last_bit": {
+        "mean": 0.9986979166666666,
+        "std": 0.002255274489021976
+      }
+    },
+    "adaptive_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6723090277777778,
+        "std": 0.01888394958142975
+      },
+      "parity": {
+        "mean": 0.4739583333333333,
+        "std": 0.03522851369392886
+      },
+      "majority": {
+        "mean": 0.54296875,
+        "std": 0.02174907954230477
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 3.0807291666666665,
+        "std": 0.1416161540614129
+      }
+    },
+    "fixed12_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6861979166666666,
+        "std": 0.010334966058846057
+      },
+      "parity": {
+        "mean": 0.5247395833333334,
+        "std": 0.01761425684696443
+      },
+      "majority": {
+        "mean": 0.5338541666666666,
+        "std": 0.03157384284630766
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "device": "cpu",
+      "parameters": 135881,
+      "train_examples": 640,
+      "seconds": 1.870588779449463,
+      "history": [
+        {
+          "loss": 0.6999380171298981,
+          "fixed_steps_accuracy": 0.51875
+        },
+        {
+          "loss": 0.609716147184372,
+          "fixed_steps_accuracy": 0.6625
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.5390625,
+          "mean_think_steps": 3.0
+        },
+        "majority": {
+          "accuracy": 0.60546875,
+          "mean_think_steps": 2.48046875
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.52734375
+        },
+        "macro_accuracy": 0.71484375,
+        "macro_mean_think_steps": 3.0026041666666665
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.4765625,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.46875,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6484375
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4765625,
+          "mean_think_steps": 3.0
+        },
+        "majority": {
+          "accuracy": 0.5390625,
+          "mean_think_steps": 2.5078125
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.53125
+        },
+        "macro_accuracy": 0.671875,
+        "macro_mean_think_steps": 3.0130208333333335
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.5234375,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.5,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6744791666666666
+      }
+    },
+    {
+      "seed": 23,
+      "device": "cpu",
+      "parameters": 135881,
+      "train_examples": 640,
+      "seconds": 1.6451807022094727,
+      "history": [
+        {
+          "loss": 0.7619084715843201,
+          "fixed_steps_accuracy": 0.5
+        },
+        {
+          "loss": 0.6443702280521393,
+          "fixed_steps_accuracy": 0.603125
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.55078125,
+          "mean_think_steps": 3.734375
+        },
+        "majority": {
+          "accuracy": 0.60546875,
+          "mean_think_steps": 2.31640625
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.0
+        },
+        "macro_accuracy": 0.71875,
+        "macro_mean_think_steps": 3.0169270833333335
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.53125,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.5234375,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 0.99609375,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.68359375
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4375,
+          "mean_think_steps": 3.68359375
+        },
+        "majority": {
+          "accuracy": 0.5234375,
+          "mean_think_steps": 2.2734375
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.0
+        },
+        "macro_accuracy": 0.6536458333333334,
+        "macro_mean_think_steps": 2.9856770833333335
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.54296875,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.5390625,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6940104166666666
+      }
+    },
+    {
+      "seed": 42,
+      "device": "cpu",
+      "parameters": 135881,
+      "train_examples": 640,
+      "seconds": 1.778282880783081,
+      "history": [
+        {
+          "loss": 0.7117950856685639,
+          "fixed_steps_accuracy": 0.5
+        },
+        {
+          "loss": 0.6479749023914337,
+          "fixed_steps_accuracy": 0.509375
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.39453125,
+          "mean_think_steps": 3.3125
+        },
+        "majority": {
+          "accuracy": 0.60546875,
+          "mean_think_steps": 3.0
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.515625
+        },
+        "macro_accuracy": 0.6666666666666666,
+        "macro_mean_think_steps": 3.2760416666666665
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.421875,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.58203125,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.66796875
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.5078125,
+          "mean_think_steps": 3.24609375
+        },
+        "majority": {
+          "accuracy": 0.56640625,
+          "mean_think_steps": 3.0
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.484375
+        },
+        "macro_accuracy": 0.69140625,
+        "macro_mean_think_steps": 3.2434895833333335
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.5078125,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.5625,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6901041666666666
+      }
+    }
+  ]
+}

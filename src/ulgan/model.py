@@ -1,63 +1,122 @@
-"""ULGAN v0.4: task-conditioned recurrent model with supervised adaptive halting."""
+"""ULGAN: prefix-supervised task-conditioned recurrent binary reasoner.
+
+This is a research prototype for synthetic binary-sequence tasks, not a general
+purpose language model. The prefix head is an auxiliary training signal; the
+inference interface remains task-conditioned and adaptively halted.
+"""
 from __future__ import annotations
 import torch
 from torch import nn
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
 TASKS = {"parity": 0, "majority": 1, "last_bit": 2}
 
+
 class ULGAN(nn.Module):
-    def __init__(self, hidden_size: int = 64, embedding_size: int = 16,
-                 task_embedding_size: int = 8, max_think_steps: int = 8):
+    def __init__(self, hidden_size: int = 96, embedding_size: int = 24,
+                 task_embedding_size: int = 12, max_think_steps: int = 12,
+                 prefix_supervision: bool = True, bidirectional: bool = True):
         super().__init__()
         self.hidden_size = hidden_size
         self.max_think_steps = max_think_steps
+        self.prefix_supervision = prefix_supervision
+        self.bidirectional = bidirectional
+        encoder_width = hidden_size * (2 if bidirectional else 1)
         self.embedding = nn.Embedding(3, embedding_size)
         self.task_embedding = nn.Embedding(len(TASKS), task_embedding_size)
-        self.encoder = nn.GRU(embedding_size + task_embedding_size, hidden_size, batch_first=True)
+        self.encoder = nn.GRU(embedding_size + task_embedding_size,
+                              hidden_size, batch_first=True, bidirectional=bidirectional)
+        self.encoder_projection = nn.Sequential(
+            nn.Linear(encoder_width, hidden_size), nn.LayerNorm(hidden_size), nn.GELU())
+        # Bit density is a non-label statistic useful for threshold-like tasks.
+        # It does not reveal parity; the model must learn parity from sequence states.
+        self.density_projection = nn.Linear(1, hidden_size, bias=False)
+        self.prefix_parity = nn.Linear(hidden_size, 1)  # causal prefix state
         self.think_token = nn.Parameter(torch.zeros(1, embedding_size))
-        self.thinker = nn.GRUCell(embedding_size + task_embedding_size, hidden_size)
-        self.output_heads = nn.ModuleList([nn.Linear(hidden_size, 1) for _ in TASKS])
-        self.halt = nn.Linear(hidden_size, 1)
+        # Each reasoning step retrieves fresh, length-masked evidence from the
+        # encoded bit sequence instead of repeatedly transforming h in isolation.
+        self.attn_query = nn.Linear(hidden_size, encoder_width, bias=False)
+        self.context_projection = nn.Sequential(
+            nn.Linear(encoder_width, hidden_size), nn.LayerNorm(hidden_size), nn.GELU())
+        self.thinker = nn.GRUCell(embedding_size + task_embedding_size + hidden_size, hidden_size)
+        self.output_heads = nn.ModuleList([nn.Sequential(nn.LayerNorm(hidden_size), nn.Linear(hidden_size, 1)) for _ in TASKS])
+        self.halt = nn.Sequential(nn.LayerNorm(hidden_size), nn.Linear(hidden_size, 1))
 
     def encode(self, tokens, lengths, tasks):
         te = self.task_embedding(tasks)
-        token_emb = self.embedding(tokens)
+        emb = self.embedding(tokens)
         task_seq = te[:, None, :].expand(-1, tokens.shape[1], -1)
-        x = torch.cat((token_emb, task_seq), dim=-1)
-        outputs, _ = self.encoder(x)
-        # Gather the state after the final real bit, not after EOS/padding.
+        # Pack real bits plus EOS so right-padding cannot alter recurrent states.
+        packed = pack_padded_sequence(
+            torch.cat((emb, task_seq), dim=-1),
+            (lengths + 1).detach().cpu(),
+            batch_first=True,
+            enforce_sorted=False,
+        )
+        packed_encoded, _ = self.encoder(packed)
+        encoded, _ = pad_packed_sequence(
+            packed_encoded, batch_first=True, total_length=tokens.shape[1]
+        )
         idx = (lengths - 1).clamp_min(0)
-        return outputs[torch.arange(tokens.shape[0], device=tokens.device), idx]
+        final = encoded[torch.arange(tokens.shape[0], device=tokens.device), idx]
+        bit_tokens = tokens[:, :-1]
+        positions = torch.arange(bit_tokens.shape[1], device=tokens.device)[None, :]
+        mask = positions < lengths[:, None]
+        density = ((bit_tokens == 1) & mask).sum(1, keepdim=True).to(emb.dtype)
+        density = density / lengths.clamp_min(1).to(emb.dtype).unsqueeze(1)
+        # Density is available only to majority classification.
+        # Parity and last_bit must rely on sequence representations.
+        summary = self.density_projection(density)
+        majority_only = (tasks == 1).to(emb.dtype).unsqueeze(1)
+        summary = summary * majority_only
+        return self.encoder_projection(final) + summary, encoded
 
-    def think_step(self, h, task_emb, tasks):
-        x = torch.cat((self.think_token.expand(h.shape[0], -1), task_emb), dim=-1)
+    def think_step(self, h, task_emb, tasks, encoded, lengths):
+        # encoded includes EOS at index lengths; attend only to actual bit states.
+        bit_states = encoded[:, :-1, :]
+        positions = torch.arange(bit_states.shape[1], device=h.device)[None, :]
+        valid = positions < lengths[:, None]
+        query = self.attn_query(h)
+        scores = torch.einsum('bld,bd->bl', bit_states, query) / (bit_states.shape[-1] ** 0.5)
+        scores = scores.masked_fill(~valid, torch.finfo(scores.dtype).min)
+        attention = torch.softmax(scores, dim=-1)
+        context = torch.bmm(attention.unsqueeze(1), bit_states).squeeze(1)
+        context = self.context_projection(context)
+        x = torch.cat((self.think_token.expand(h.shape[0], -1), task_emb, context), dim=-1)
         h = self.thinker(x, h)
         all_logits = torch.cat([head(h) for head in self.output_heads], dim=1)
         logits = all_logits.gather(1, tasks[:, None]).squeeze(1)
         return h, logits, self.halt(h).squeeze(-1)
 
     def forward(self, tokens, lengths, tasks):
-        h = self.encode(tokens, lengths, tasks)
+        h, encoded = self.encode(tokens, lengths, tasks)
         te = self.task_embedding(tasks)
-        logits, halt_logits = [], []
+        logits, halts = [], []
         for _ in range(self.max_think_steps):
-            h, y, z = self.think_step(h, te, tasks)
-            logits.append(y); halt_logits.append(z)
-        return torch.stack(logits, 1), torch.stack(halt_logits, 1)
+            h, y, z = self.think_step(h, te, tasks, encoded, lengths)
+            logits.append(y); halts.append(z)
+        prefix_states = encoded[..., :self.hidden_size]
+        prefix_logits = self.prefix_parity(prefix_states).squeeze(-1) if self.prefix_supervision else None
+        return torch.stack(logits, 1), torch.stack(halts, 1), prefix_logits
 
     @torch.no_grad()
     def predict_one(self, bits, task_id: int, threshold: float = 0.95):
+        if not bits or any(int(b) not in (0, 1) for b in bits):
+            raise ValueError("bits must be a non-empty sequence of 0/1 values")
+        if int(task_id) not in TASKS.values():
+            raise ValueError(f"task_id must be one of {sorted(TASKS.values())}")
+        if not 0.0 < threshold <= 1.0:
+            raise ValueError("threshold must be in (0, 1]")
         self.eval(); device = next(self.parameters()).device
-        seq = list(map(int, bits)) + [2]
-        tokens = torch.tensor([seq], dtype=torch.long, device=device)
+        tokens = torch.tensor([list(map(int, bits)) + [2]], dtype=torch.long, device=device)
         lengths = torch.tensor([len(bits)], dtype=torch.long, device=device)
         tasks = torch.tensor([int(task_id)], dtype=torch.long, device=device)
-        h = self.encode(tokens, lengths, tasks); te = self.task_embedding(tasks)
-        cumulative = 0.0
+        h, encoded = self.encode(tokens, lengths, tasks); te = self.task_embedding(tasks)
+        survival = 1.0
         for step in range(self.max_think_steps):
-            h, logits, halt_logit = self.think_step(h, te, tasks)
-            p = float(torch.sigmoid(halt_logit).item())
-            cumulative = 1.0 - (1.0 - cumulative) * (1.0 - p)
+            h, logits, halt_logit = self.think_step(h, te, tasks, encoded, lengths)
+            survival *= 1.0 - float(torch.sigmoid(halt_logit).item())
+            cumulative = 1.0 - survival
             if cumulative >= threshold or step == self.max_think_steps - 1:
                 return int(logits.item() >= 0), step + 1, cumulative
         raise RuntimeError("unreachable")

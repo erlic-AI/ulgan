@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "model": "ULGAN 1",
+  "organization": "Erlic AI",
+  "parameters": 200777,
+  "seeds": [
+    11,
+    23,
+    42
+  ],
+  "training_examples_per_seed": 256000,
+  "max_think_steps": 12,
+  "halt_threshold": 0.95,
+  "architecture": {
+    "hidden_size": 96,
+    "embedding_size": 24,
+    "task_embedding_size": 12,
+    "max_think_steps": 12,
+    "prefix_supervision": true,
+    "bidirectional": true
+  },
+  "adaptive": {
+    "seen_1_128": {
+      "macro_accuracy_mean": 0.9998889,
+      "macro_accuracy_std": 0.00019245,
+      "parity": 1.0,
+      "majority": 0.9996667,
+      "last_bit": 1.0,
+      "mean_think_steps": 1.9261
+    },
+    "unseen_129_256": {
+      "macro_accuracy_mean": 0.9974444,
+      "macro_accuracy_std": 0.0010046,
+      "parity": 1.0,
+      "majority": 0.9923333,
+      "last_bit": 1.0,
+      "mean_think_steps": 2.1266
+    }
+  },
+  "fixed_12": {
+    "seen_1_128": {
+      "macro_accuracy": 0.72272,
+      "parity": 0.6433,
+      "majority": 0.9983,
+      "last_bit": 0.5265
+    },
+    "unseen_129_256": {
+      "macro_accuracy": 0.71689,
+      "parity": 0.66117,
+      "majority": 0.99,
+      "last_bit": 0.4995
+    }
+  },
+  "comparison_warning": "ULGAN v0.4 and ULGAN 1 used different evaluation length ranges, training configurations and seed counts. Cross-version comparisons are descriptive, not a controlled apples-to-apples experiment."
+}

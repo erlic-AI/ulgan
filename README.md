@@ -1,12 +1,15 @@
 <div align="center">
 
-# ulgan
+# ULGAN 1
 
-### Compact adaptive-computation research
+### Compact Adaptive Computation Research
 
-**Erlic AI · Independent research initiative**
+**Erlic AI · Independent AI Research**
 
-[Research direction](research/research_direction.md) · [Methodology](research/methodology.md) · [Model card](MODEL_CARD.md)
+[GitHub](https://github.com/erlic-AI/ulgan) ·
+[Releases](https://github.com/erlic-AI/ulgan/releases)
+
+**ULGAN 1.0.0 — First public release**
 
 </div>
 
@@ -14,128 +17,159 @@
 
 ## Overview
 
-**ulgan** is an independent research project exploring a central question: *can a compact learned model decide how much computation an input deserves, instead of applying the same fixed computation to every case?*
+ULGAN is an independent research project exploring adaptive internal
+computation: a compact neural model learns when to stop thinking and
+how much computation an input requires.
 
-The long-term research direction is adaptive internal computation: build a compact representation, refine it when additional processing is useful, and learn when further computation is unlikely to improve a decision. The broader ambition is to study whether this principle can support more capable structured problem-solving systems. That is a research objective—not a claim that the current checkpoint is a general reasoning model.
+ULGAN 1 is the first multi-seed release of this research line. It
+extends the v0.4 prototype with a larger recurrent architecture,
+prefix supervision, density-aware majority processing and an
+adaptive halting objective.
 
-The v0.4 release is a deliberately narrow experimental prototype. It studies learned halting on three synthetic binary-sequence tasks. It is **not** a language model, chatbot, general-purpose AI, or production system.
+**Scope:** ULGAN 1 is a research model for three synthetic binary
+sequence tasks. It is not a language model, chatbot or general-purpose
+reasoning system.
 
-## What v0.4 contains
+## Version evolution
 
-- 34,908 trainable parameters.
-- Task-conditioned GRU sequence encoder.
-- Shared recurrent latent thinker using a GRUCell.
-- Task-specific binary prediction heads.
-- Learned halting controller with a cumulative threshold of 0.95.
-- Up to 8 latent thinking steps.
-- Deep supervision across thinking steps and an expected-computation penalty.
+| Property | ULGAN v0.4 | ULGAN 1 |
+|---|---:|---:|
+| Parameters | 34,908 | 200,777 |
+| Independent seeds | 1 | 3 |
+| Maximum thinking steps | 8 | 12 |
+| Training examples | 40,960 presented | 256,000 per seed |
+| Adaptive seen-range macro accuracy | 80.67% | 99.99% |
+| Adaptive held-out macro accuracy | 80.27% | 99.74% |
+| Mean adaptive steps, seen | 2.11 | 1.93 |
+| Mean adaptive steps, held-out | 2.06 | 2.13 |
+
+**Comparison note:** v0.4 evaluated lengths 1–64 and 65–128.
+ULGAN 1 evaluated lengths 1–128 and 129–256. Training settings,
+sample counts and seed counts also differ. These are reported
+version results, not a controlled apples-to-apples experiment.
+
+## Benchmark evolution
+
+![Six-panel benchmark comparison](assets/ulgan_1_comparison_6panel.png)
+
+### ULGAN 1 — adaptive inference
+
+| Evaluation range | Macro accuracy | Parity | Majority | Last bit |
+|---|---:|---:|---:|---:|
+| Seen: 1–128 | **99.99%** | 100.00% | 99.97% | 100.00% |
+| Held-out: 129–256 | **99.74%** | 100.00% | 99.23% | 100.00% |
+
+### Adaptive vs fixed 12 steps
+
+| Evaluation range | Adaptive macro | Fixed-12 macro |
+|---|---:|---:|
+| Seen: 1–128 | 99.99% | 72.27% |
+| Held-out: 129–256 | 99.74% | 71.69% |
+
+The fixed-step results show that later computation is not automatically
+better. The adaptive policy is the intended inference method.
+
+### Architecture and training
+
+- Task-conditioned bidirectional GRU encoder.
+- Recurrent latent thinking module.
+- Learned adaptive halting controller.
+- Prefix parity supervision.
+- Density-aware feature for the majority task.
+- 12 maximum thinking steps.
+- Three independently trained seeds: 11, 23 and 42.
+- 200,777 trainable parameters per model.
 
 ### Supported tasks
 
-| Task | Target |
+| Task | Definition |
 |---|---|
-| `parity` | 1 when the sequence contains an odd number of ones |
-| `majority` | 1 when strictly more than half of the bits are 1 |
+| `parity` | 1 if the number of ones is odd |
+| `majority` | 1 if strictly more than half the bits are 1 |
 | `last_bit` | The final bit in the sequence |
-
-## Benchmark results
-
-The committed reference run used CPU, seed 42, 8 epochs × 40 steps × 128 examples (40,960 presented examples), and 500 test examples per task in each evaluation range. The fixed-step baseline uses the eighth output from the **same checkpoint**.
-
-### Adaptive computation vs fixed 8 steps
-
-| Evaluation range | Adaptive macro accuracy | Adaptive mean steps | Fixed-8 macro accuracy |
-|---|---:|---:|---:|
-| Seen lengths 1–64 | **80.67%** | **2.11** | 83.27% |
-| Held-out lengths 65–128 | **80.27%** | **2.06** | 79.60% |
-
-### Per-task accuracy
-
-| Evaluation range | Task | Adaptive | Fixed 8 |
-|---|---|---:|---:|
-| 1–64 | Parity | 44.8% | 52.0% |
-| 1–64 | Majority | 97.2% | 97.8% |
-| 1–64 | Last bit | 100.0% | 100.0% |
-| 65–128 | Parity | 50.4% | 46.8% |
-| 65–128 | Majority | 90.4% | 92.0% |
-| 65–128 | Last bit | 100.0% | 100.0% |
-
-Adaptive inference uses approximately **74% fewer latent steps** than the fixed-eight-step policy in this run. This is a reduction in model steps, not a measured 74% wall-clock speedup. Accuracy effects are mixed: adaptive inference is slightly lower on the seen-range macro score and slightly higher on the held-out-range macro score. Parity remains a major weakness.
-
-The results are single-seed measurements without confidence intervals. They should be treated as an initial reference point, not statistically robust evidence or a state-of-the-art comparison. Exact values and training history are available in [`metrics.json`](artifacts/benchmarks/v0.4/metrics.json).
-
-## Research history and experiment records
-
-The repository preserves the executable v0.1–v0.3 snapshots under [`research/history/`](research/history/) and documents the v0.4 protocol in [`research/methodology.md`](research/methodology.md). The supplied archives did not include complete primary logs for every numbered research experiment up to 70. Experiments 66, 68, and 69 have provisional recovery notes only; they are explicitly separated from the verified v0.4 benchmark. See the [experiment index](research/experiment_index.md).
 
 ## Installation
 
-Python 3.10+ is recommended. From the repository root:
-
 ```bash
-python -m venv .venv
-# Linux/macOS
-source .venv/bin/activate
-# Windows PowerShell
-# .venv\Scripts\Activate.ps1
+git clone https://github.com/erlic-AI/ulgan.git
+cd ulgan
 pip install -r requirements.txt
 ```
 
-## Run inference
+## Inference
 
-```bash
-python scripts/predict.py parity 1 0 1 1
-python scripts/predict.py majority 1 0 1 1
-python scripts/predict.py last_bit 1 0 1 1
+```python
+import torch
+from src.ulgan.model import ULGAN, TASKS
+
+model = ULGAN(
+    hidden_size=96,
+    embedding_size=24,
+    task_embedding_size=12,
+    max_think_steps=12,
+    prefix_supervision=True,
+    bidirectional=True
+)
+
+checkpoint = torch.load(
+    "artifacts/ulgan_1_density_gated/ulgan_1_seed_11.pt",
+    map_location="cpu",
+    weights_only=False
+)
+
+# The training checkpoint contains its model state.
+state = checkpoint.get(
+    "model_state_dict",
+    checkpoint.get("state_dict", checkpoint.get("model", checkpoint))
+)
+model.load_state_dict(state, strict=True)
+model.eval()
+
+bits = [1, 0, 1, 1, 0, 1]
+prediction, steps, halt_probability = model.predict_one(
+    bits, TASKS["parity"], threshold=0.95
+)
+print(prediction, steps, halt_probability)
 ```
 
-## Train from scratch
+For a ready-to-use standalone loader and all three clean state-dict
+files, see the separate Hugging Face model repository.
 
-The reference configuration is recorded in [`configs/v0.4.json`](configs/v0.4.json). To reproduce the original run:
+## Repository contents
 
-```bash
-python scripts/train.py --seed 42 --epochs 8 --steps-per-epoch 40 --batch-size 128 --ponder-weight 0.001 --eval-samples 500 --train-max-length 64 --out artifacts/benchmarks/reproduced
+- `src/` — model implementation.
+- `scripts/` — training and inference utilities.
+- `tests/` — automated model tests.
+- `configs/` — model configuration.
+- `artifacts/` — checkpoints, metrics and experiment records.
+- `research/` — protocols, reports and diagnostics.
+- `assets/` — release benchmark visualizations.
+
+The official ULGAN 1 checkpoints are in
+`artifacts/ulgan_1_density_gated/`. Other folders preserve earlier
+experiments and ablations; they are not interchangeable with the
+official release checkpoints.
+
+## Limitations
+
+- The benchmark uses synthetic binary sequences only.
+- Results do not establish general reasoning or language capability.
+- Cross-version benchmark ranges are not identical.
+- Difficult constructed examples can still expose errors.
+- No real-world or safety-critical use is supported.
+
+## Citation
+
+```bibtex
+@software{erlic_ai_ulgan_1,
+  author = {{Erlic AI}},
+  title = {ULGAN 1: Compact Adaptive Computation Research},
+  version = {1.0.0},
+  year = {2026},
+  url = {https://github.com/erlic-AI/ulgan}
+}
 ```
-
-This writes a new checkpoint and metrics report to the selected output directory; it does not overwrite the committed reference artifact.
-
-## Tests
-
-```bash
-pytest -q
-```
-
-The smoke tests verify checkpoint loading, parameter count, output shapes, finite values, and prediction bounds. They are software checks, not evidence of task accuracy.
-
-## Repository layout
-
-```text
-ulgan/
-├── artifacts/
-│   ├── benchmarks/v0.4/
-│   └── checkpoints/
-├── configs/
-├── research/
-│   ├── experiments/
-│   ├── history/
-│   ├── experiment_index.md
-│   ├── methodology.md
-│   └── research_direction.md
-├── scripts/
-├── src/ulgan/
-├── tests/
-├── CHANGELOG.md
-├── CITATION.cff
-├── LICENSE
-├── MODEL_CARD.md
-├── README.md
-└── requirements.txt
-```
-
-## Limitations and responsible use
-
-The current model only addresses three synthetic binary-sequence tasks. It has weak parity performance, has only one recorded random seed, and has no evidence of general reasoning, language capability, or real-world decision competence. Do not use it in consequential settings. Read the [model card](MODEL_CARD.md) before use.
 
 ## License
 
-Apache License 2.0. See [`LICENSE`](LICENSE).
+Apache License 2.0. See the repository `LICENSE` file.

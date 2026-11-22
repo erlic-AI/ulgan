@@ -1,0 +1,363 @@
+{
+  "project": "ulgan 1",
+  "created_utc": "2026-11-21T03:15:49.504071Z",
+  "source_directory": "/kaggle/working/ulgan_1_attention_act/ulgan_1",
+  "file_count": 71,
+  "files": [
+    {
+      "path": "RELEASE_CHECKLIST.md",
+      "size_bytes": 1215,
+      "sha256": "b9233b40dd2897aa9509c5903477c2d6d2f18285262fa8905e75b73f4b2fc3e8"
+    },
+    {
+      "path": "VALIDATION.md",
+      "size_bytes": 1121,
+      "sha256": "0f59f652a5facf93145fd07f89eedd203cd412fbee0c31caeb4239f2abc2997e"
+    },
+    {
+      "path": "SHA256SUMS.txt",
+      "size_bytes": 5611,
+      "sha256": "85345cbe5a58573798e356b3a546b866fd50c5ef114da714b53df7887fdb25e0"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size_bytes": 1372,
+      "sha256": "81d96c92fbb41cc0ae14c511da07a68735f2017eac718a972715f09db0b86462"
+    },
+    {
+      "path": "MODEL_CARD.md",
+      "size_bytes": 2752,
+      "sha256": "39648115626bfd733a0f042fef5c29c971ff5cb320b1fee8c6f6604f75901aca"
+    },
+    {
+      "path": "requirements.txt",
+      "size_bytes": 35,
+      "sha256": "809edbf2f6ab2cb5bc17a387396583549eeca340df251e209c5328205ba4c703"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 4454,
+      "sha256": "ddb43aa59bbe12503647029b6f4c7e0240fc72f9afabbc93e8d37d91fb3fefb5"
+    },
+    {
+      "path": "configs/ulgan_1.json",
+      "size_bytes": 1209,
+      "sha256": "f96d9e863fd85f7fe3e67c3eb5ab32416abc6e08c319f88e40fa09691fc48bcb"
+    },
+    {
+      "path": "tests/test_model.py",
+      "size_bytes": 4096,
+      "sha256": "dcec0f88610c00f914a6698326ba14ea930fb91d7be36c8edf7306dc534b5ffe"
+    },
+    {
+      "path": "research/ulgan_1_experiment_report.md",
+      "size_bytes": 10036,
+      "sha256": "283a6e28449ea67aa862df580f730d77eeb772f13ff828a9183b996f111971ca"
+    },
+    {
+      "path": "research/experimental_protocol.md",
+      "size_bytes": 3489,
+      "sha256": "dea4c2f6f39da21bd20d3312097cadf1b1fe005a46ac89a7672f546b7a072b2a"
+    },
+    {
+      "path": "research/pilot_metrics_prefix_off.json",
+      "size_bytes": 8156,
+      "sha256": "b87f27693058465bed86aabc10ed9b373dea8dff1fb9ae4f96f78489d38446ea"
+    },
+    {
+      "path": "research/pilot_metrics_prefix_on.json",
+      "size_bytes": 8159,
+      "sha256": "19c38e9610225074de44b2eb74914cb5be4bd32f99af3fd82275f9b924f0f365"
+    },
+    {
+      "path": "research/pilot_results.md",
+      "size_bytes": 1909,
+      "sha256": "7e64ddfb33954d0f99c0a6e19bb6fb50699b02cc9a8a30a77a2198726edb62a1"
+    },
+    {
+      "path": "scripts/predict.py",
+      "size_bytes": 869,
+      "sha256": "18ecaaadd95a086db95d21c1db60bab4e2f4fc7dc4ce9bf5902b67b604d2d772"
+    },
+    {
+      "path": "scripts/train.py",
+      "size_bytes": 13790,
+      "sha256": "d01a0da89df0a0607e9a57240bf695ea6b761ce9b7cedb608bb96a578511135f"
+    },
+    {
+      "path": "scripts/run_release_experiments.sh",
+      "size_bytes": 665,
+      "sha256": "95914dfc61c61ddbb11018d9d204b57f4c219b9d665e612af40e1840673b1445"
+    },
+    {
+      "path": "artifacts/ablation_prefix_off/run.log",
+      "size_bytes": 29701,
+      "sha256": "732f52aee1caa42d7360ca9b277e6d2617bf1e3a60b4cdff69f5c7a4cbd67662"
+    },
+    {
+      "path": "artifacts/ablation_prefix_off/metrics.json",
+      "size_bytes": 29061,
+      "sha256": "65c57fc6886f4572f933bb1ba2e1505592737f386cc0e0590b21a42fee1713c1"
+    },
+    {
+      "path": "artifacts/ablation_prefix_off/ulgan_1_seed_23.pt",
+      "size_bytes": 818090,
+      "sha256": "40bd951274e38b46ade8eb90d27d4269c7e3af085e32d6847ce658ff32923b8d"
+    },
+    {
+      "path": "artifacts/ablation_prefix_off/ulgan_1_seed_42.pt",
+      "size_bytes": 818090,
+      "sha256": "8e1838735a276cefaf4c60fcf281076eb1234092ffb23b5af00ddd0e6677ada6"
+    },
+    {
+      "path": "artifacts/ablation_prefix_off/ulgan_1_seed_11.pt",
+      "size_bytes": 818090,
+      "sha256": "f84e565174c9cb29cb7145719e6ac7484770f10a2738434e043d3275d1e269bc"
+    },
+    {
+      "path": "artifacts/ulgan_1_density_gated/metrics.json",
+      "size_bytes": 28170,
+      "sha256": "1c088db30f6abe34ab456fd4ec230dec649819beffdabb484ca480532a9abef0"
+    },
+    {
+      "path": "artifacts/ulgan_1_density_gated/ulgan_1_seed_23.pt",
+      "size_bytes": 818090,
+      "sha256": "4d7541d89b3dde3c1e5ec3cd1849d4d7e12db853d0bf4ebc9c13d2a4c2412706"
+    },
+    {
+      "path": "artifacts/ulgan_1_density_gated/ulgan_1_seed_42.pt",
+      "size_bytes": 818090,
+      "sha256": "5c62147cb44754e183cd2b49bbbc3b371dda60093638975813185659f978b152"
+    },
+    {
+      "path": "artifacts/ulgan_1_density_gated/ulgan_1_seed_11.pt",
+      "size_bytes": 818090,
+      "sha256": "8988e3e29ba907763e3e5913a3f24417604535ad8fab18d2ea1f9bfba88883e8"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_025/metrics.json",
+      "size_bytes": 27959,
+      "sha256": "0d3b8c40cea3e1aafa77a902d7f1af8416ebb55c044024f62d08dfb9b36a5ec0"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_025/ulgan_1_seed_23.pt",
+      "size_bytes": 818090,
+      "sha256": "12e0695beda62e93ff6672334d70cc0436ea99e1cc2fb26c2d75511187d4975c"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_025/ulgan_1_seed_42.pt",
+      "size_bytes": 818090,
+      "sha256": "8e025c364017c0e2a6c211975c0d80a4c9943469f6b4d1a9ac64412101128296"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_025/ulgan_1_seed_11.pt",
+      "size_bytes": 818090,
+      "sha256": "8db4f5d4a8f043b28f8d3b191bc4f9408a616977aa7a86e539eefbbc8bccd101"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_off/metrics.json",
+      "size_bytes": 28713,
+      "sha256": "f0b09ec5733f4ff220c624a5639d2bc1ca7774cba0f76c4992e18ec84fe3172a"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_off/ulgan_1_seed_23.pt",
+      "size_bytes": 818090,
+      "sha256": "5eb5089b1bba988b88f750da611982ad2c740316fd6b50ec8cfbda3cc979a7eb"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_off/ulgan_1_seed_42.pt",
+      "size_bytes": 818090,
+      "sha256": "ba3a53f58f82fb8a4dfe938992395dd1de8ce02e2128c1d374c2ff9dbb275134"
+    },
+    {
+      "path": "artifacts/ulgan_1_attention_act/prefix_off/ulgan_1_seed_11.pt",
+      "size_bytes": 818090,
+      "sha256": "52d71a1e7c782647d78d785d56aac66ad8ae888398b56bbe3480bc5c951f7b66"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix010/metrics.json",
+      "size_bytes": 8529,
+      "sha256": "a15de3e0631d875dd80e2cfeea3b51e67c239c4afd733982e75d500637b897c8"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix010/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "38c657b2f6e5a02c0bde503250607591254e69ac8924c62bbc70e27dd350360d"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix010/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "90a2925e6162481ff7b2226d984cc85b071ffa7c2271e699784bcae38299cd60"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix010/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "910c90e1b2ae58864c57adf1114c55e177a813a5e572167c4a0b6e4f954320a2"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_causal/metrics.json",
+      "size_bytes": 8505,
+      "sha256": "28979bfca8006938594e3f7f20f88f14444e76e1a314acb6d680b03605293f46"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_causal/ulgan_1_seed_23.pt",
+      "size_bytes": 364605,
+      "sha256": "be036fd7dd396fc2220cff2c9cf384bc3fa8993018f419433d083086cfbca3cd"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_causal/ulgan_1_seed_42.pt",
+      "size_bytes": 364605,
+      "sha256": "6db6414f322f2d69049e928f9b2ea7dd2fec568fff95f329b619c42f23a72fcb"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_causal/ulgan_1_seed_11.pt",
+      "size_bytes": 364605,
+      "sha256": "7dc8f75745360dff39c1be7a78e38115bd21f916fecf5e2421a59280e3ba3c11"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_train64/metrics.json",
+      "size_bytes": 8533,
+      "sha256": "de48a15077f6d972d0a63ed3a8f8e33bad79c232a73ead43b39410df6547e9a2"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_train64/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "6ecd47fb3a1ba93296cbb9962c5db335606acb901676d4ec0827ee3e39f7fe18"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_train64/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "d9f9c5d23d3bf776cdcaabfe3d0a32d7fe7b9d813368d0ef9f7fe8f2e9257669"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_train64/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "25134105aeb6fd69febd7d17143e6f45d33c4fc5d03fba7fa85f0788a241251f"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix050/metrics.json",
+      "size_bytes": 8449,
+      "sha256": "a631eb87c21793d3030619a1bb43e1ab3d943d168d7db506040c976fadc901c7"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix050/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "33d5471a28cbd1e51b7ed444cde7f4e73d81aaf5b90ba9a3abcdb6f438142486"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix050/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "c9ed412dde7d84d3de914766c86dc6670a9870ad6a2a1780337f3a7dab3387f5"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix050/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "4e0f4fdf673c438856f86fb174d98b87d17e9464077febaba48ac2ac1d99cf51"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed23/metrics.json",
+      "size_bytes": 4324,
+      "sha256": "eaee1cbced299d09096e46bf0f944d885f2386a4a1cc8bfb1c9bda3f163cf696"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed23/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "533b752dbd35a8b17d2e4944ecbe3c9a7e1129b745a33cef8587540461b01435"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_main/metrics.json",
+      "size_bytes": 9248,
+      "sha256": "99e64e74be919f2d4293fdc3d983f30ee2a6eeabecd52167c5c042a831b3c748"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_main/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "779dd5e2982f3cdb9b3d57233e0eb5f8c37b095ef1d20497c3e1b159406881cd"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_main/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "9ee91cdba09b701bc3cc8c1f0716132f153ee796d164eb5c03f3c1aec51448c6"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_main/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "ba8c9138965684889d08e668a6f84c86d18a08635d42942adfba80fd01ca3c76"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed11/metrics.json",
+      "size_bytes": 4299,
+      "sha256": "a88c23714970d801cd5ca40c6a5302fa3e8916a79beb6978b2bfe0eaa19783d2"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed11/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "8da7bff050c0605ec3dbd2f72cfc3f317dcfe7360a549c50dbc6568341a34b29"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed42/metrics.json",
+      "size_bytes": 4305,
+      "sha256": "3f8297d0e77c48d72525e041ce8ae76531453b802d4a92cd0edcb81822dc3591"
+    },
+    {
+      "path": "artifacts/ulgan_1/extended_seed42/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "2a2d170d5421bcead3b6df1e4ec30b95c23cfaa714a90f3cb482c173daff236f"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_no_parity/metrics.json",
+      "size_bytes": 8534,
+      "sha256": "3c685dbfd435d0c6935d480a963dec3853165c24499daddbbaef6506a19a886d"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_no_parity/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "8eb47b0a23915d2ce3e6cb4def9dbeb4e95268ba59b507c5919a01de44a34817"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_no_parity/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "9f7bf3acdf97d904faa88dd1db6073e75e40cb7e8cade2b64a28225aa6fe9f07"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_no_parity/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "5f0b4e50525120a0e74e3dbad491cde42a86d1cce6787ad8861bd3904de48944"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix025/metrics.json",
+      "size_bytes": 8508,
+      "sha256": "96546ec475944c29521549b70579acfc992bf4d67ca42117ca51eeda313771fb"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix025/ulgan_1_seed_23.pt",
+      "size_bytes": 557073,
+      "sha256": "cf1bf27a9aef35f596e67dc8283bc5c81b0a4020e15b0e36c1a3700ed0ddeae4"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix025/ulgan_1_seed_42.pt",
+      "size_bytes": 557073,
+      "sha256": "e53cfb0909cfbc2e5ad82254f7c89dc2cd3896323e8cf455f46dea064d65a5a9"
+    },
+    {
+      "path": "artifacts/ulgan_1/density_prefix025/ulgan_1_seed_11.pt",
+      "size_bytes": 557073,
+      "sha256": "8bbf7baee2f9a702d0fa85e474df353b47148dd079f7f300c40bb2f1e8136509"
+    },
+    {
+      "path": "src/ulgan/__init__.py",
+      "size_bytes": 61,
+      "sha256": "c0ea9931cf17092a4261be7a48b22500f7f6277c5744b6936a1673e6304e1512"
+    },
+    {
+      "path": "src/ulgan/model.py",
+      "size_bytes": 6888,
+      "sha256": "ecd1717ab1517fa74d3967118d56e92054e1deb32d45625e180b3e22e5dda369"
+    },
+    {
+      "path": "src/ulgan/model.py.pre_density_fix",
+      "size_bytes": 6649,
+      "sha256": "2076487e510c38dfffa7c63f72d88dc640235eeef371675d6d50e5008371efb6"
+    }
+  ]
+}

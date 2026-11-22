@@ -1,0 +1,358 @@
+{
+  "name": "ulgan 1",
+  "seeds": [
+    11,
+    23,
+    42
+  ],
+  "settings": {
+    "seeds": [
+      11,
+      23,
+      42
+    ],
+    "epochs": 3,
+    "steps_per_epoch": 10,
+    "batch_size": 16,
+    "train_max_length": 128,
+    "eval_samples": 128,
+    "ponder_weight": 0.0005,
+    "prefix_weight": 0.5,
+    "disable_prefix_supervision": false,
+    "causal_encoder": false,
+    "out": "artifacts/ulgan_1/density_prefix050"
+  },
+  "aggregate": {
+    "adaptive_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.6970486111111112,
+        "std": 0.029037723409162736
+      },
+      "parity": {
+        "mean": 0.4869791666666667,
+        "std": 0.05758683434243745
+      },
+      "majority": {
+        "mean": 0.6041666666666666,
+        "std": 0.04009063624567878
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 3.103298611111111,
+        "std": 0.2543076865732365
+      }
+    },
+    "fixed12_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.6588541666666666,
+        "std": 0.025113673856752488
+      },
+      "parity": {
+        "mean": 0.4895833333333333,
+        "std": 0.05915529526875285
+      },
+      "majority": {
+        "mean": 0.4869791666666667,
+        "std": 0.01626301562082916
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    },
+    "adaptive_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6840277777777778,
+        "std": 0.021049228564205127
+      },
+      "parity": {
+        "mean": 0.4921875,
+        "std": 0.06943901888527804
+      },
+      "majority": {
+        "mean": 0.5598958333333334,
+        "std": 0.01626301562082916
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 3.071180555555556,
+        "std": 0.2831884075837406
+      }
+    },
+    "fixed12_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6631944444444445,
+        "std": 0.026343734210926256
+      },
+      "parity": {
+        "mean": 0.4973958333333333,
+        "std": 0.06735686018946647
+      },
+      "majority": {
+        "mean": 0.4921875,
+        "std": 0.04752158226795484
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": [
+    {
+      "seed": 11,
+      "device": "cpu",
+      "parameters": 135977,
+      "train_examples": 480,
+      "seconds": 4.259154558181763,
+      "history": [
+        {
+          "loss": 0.8961524605751038,
+          "fixed_steps_accuracy": 0.49375
+        },
+        {
+          "loss": 0.7985394716262817,
+          "fixed_steps_accuracy": 0.525
+        },
+        {
+          "loss": 0.7594402134418488,
+          "fixed_steps_accuracy": 0.6625
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.53125,
+          "mean_think_steps": 3.0234375
+        },
+        "majority": {
+          "accuracy": 0.59375,
+          "mean_think_steps": 3.015625
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 4.0078125
+        },
+        "macro_accuracy": 0.7083333333333334,
+        "macro_mean_think_steps": 3.3489583333333335
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.53125,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.5,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6770833333333334
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4375,
+          "mean_think_steps": 3.0
+        },
+        "majority": {
+          "accuracy": 0.578125,
+          "mean_think_steps": 3.0
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 4.0
+        },
+        "macro_accuracy": 0.671875,
+        "macro_mean_think_steps": 3.3333333333333335
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4375,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.4609375,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6328125
+      }
+    },
+    {
+      "seed": 23,
+      "device": "cpu",
+      "parameters": 135977,
+      "train_examples": 480,
+      "seconds": 4.106910943984985,
+      "history": [
+        {
+          "loss": 0.8930930614471435,
+          "fixed_steps_accuracy": 0.5375
+        },
+        {
+          "loss": 0.807796710729599,
+          "fixed_steps_accuracy": 0.6125
+        },
+        {
+          "loss": 0.7326186656951904,
+          "fixed_steps_accuracy": 0.6875
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.5078125,
+          "mean_think_steps": 2.4609375
+        },
+        "majority": {
+          "accuracy": 0.6484375,
+          "mean_think_steps": 2.0234375
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 4.0390625
+        },
+        "macro_accuracy": 0.71875,
+        "macro_mean_think_steps": 2.8411458333333335
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.515625,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.4921875,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6692708333333334
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.46875,
+          "mean_think_steps": 2.390625
+        },
+        "majority": {
+          "accuracy": 0.546875,
+          "mean_think_steps": 2.0
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.921875
+        },
+        "macro_accuracy": 0.671875,
+        "macro_mean_think_steps": 2.7708333333333335
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.484375,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.546875,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6770833333333334
+      }
+    },
+    {
+      "seed": 42,
+      "device": "cpu",
+      "parameters": 135977,
+      "train_examples": 480,
+      "seconds": 4.329005241394043,
+      "history": [
+        {
+          "loss": 0.874454528093338,
+          "fixed_steps_accuracy": 0.475
+        },
+        {
+          "loss": 0.8054244577884674,
+          "fixed_steps_accuracy": 0.575
+        },
+        {
+          "loss": 0.7198921144008636,
+          "fixed_steps_accuracy": 0.7
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.421875,
+          "mean_think_steps": 2.5
+        },
+        "majority": {
+          "accuracy": 0.5703125,
+          "mean_think_steps": 3.0
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.859375
+        },
+        "macro_accuracy": 0.6640625,
+        "macro_mean_think_steps": 3.1197916666666665
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.421875,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.46875,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6302083333333334
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.5703125,
+          "mean_think_steps": 2.453125
+        },
+        "majority": {
+          "accuracy": 0.5546875,
+          "mean_think_steps": 2.96875
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 3.90625
+        },
+        "macro_accuracy": 0.7083333333333334,
+        "macro_mean_think_steps": 3.109375
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.5703125,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.46875,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6796875
+      }
+    }
+  ]
+}

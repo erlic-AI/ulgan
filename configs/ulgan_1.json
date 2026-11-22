@@ -1,0 +1,46 @@
+{
+  "name": "ulgan 1",
+  "status": "full three-seed benchmark completed; ablations pending",
+  "seeds": [
+    11,
+    23,
+    42
+  ],
+  "development_benchmark": {
+    "epochs": 5,
+    "steps_per_epoch": 20,
+    "batch_size": 32,
+    "train_max_length": 128,
+    "eval_samples_per_task_per_range": 1024,
+    "prefix_supervision": "ablation: off and weight 0.25"
+  },
+  "reference_full_benchmark": {
+    "epochs": 20,
+    "steps_per_epoch": 100,
+    "batch_size": 128,
+    "train_max_length": 128,
+    "eval_samples_per_task_per_range": 2000,
+    "completed": true,
+    "completed_seeds": [
+      11,
+      23,
+      42
+    ],
+    "device": "cuda"
+  },
+  "max_think_steps": 12,
+  "halt_threshold": 0.95,
+  "ponder_weight": 0.0005,
+  "prefix_parity_weight": 0.25,
+  "architecture": {
+    "hidden_size": 96,
+    "embedding_size": 24,
+    "task_embedding_size": 12,
+    "bidirectional_encoder": true,
+    "density_feature": "ones / valid_length",
+    "exact_parity_feature": false,
+    "token_level_attention_in_thinker": true,
+    "attention_mask": "valid bit positions only; excludes EOS and padding",
+    "halting_objective": "differentiable ACT-weighted per-step classification loss plus ponder penalty"
+  }
+}

@@ -1,13 +1,12 @@
 # Changelog
 
-## v0.4 — research release packaging
-- Preserved the v0.4 model, checkpoint, training implementation, and recorded metrics.
-- Reorganized source, scripts, tests, configuration, checkpoints, and benchmark outputs.
-- Added a package-based import layout and a command-line prediction entry point.
-- Expanded repository documentation and made the scope and limitations explicit.
+## ULGAN 1.0.0
+- First public multi-seed release.
+- 200,777-parameter adaptive recurrent model.
+- Three official seeds: 11, 23 and 42.
+- Added release benchmark dashboard and model card.
+- Added separate Hugging Face PyTorch inference package.
+- Preserved historical v0.4 release and experiment records.
 
-## Model development history
-- v0.1: recurrent binary parity prototype with EOS termination.
-- v0.2: shared task-conditioned model for parity, majority, and last-bit.
-- v0.3: adaptive latent computation and learned halting.
-- v0.4: batched GRU encoding, deep supervision, and evaluation on longer held-out sequences.
+## v0.4 and earlier
+See the existing repository history and research documentation.

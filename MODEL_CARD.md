@@ -1,36 +1,54 @@
-# Model card — ulgan v0.4
+# ULGAN 1 — Model Card
 
 ## Summary
-
-ulgan v0.4 is a 34,908-parameter, task-conditioned recurrent neural network with a learned halting controller. It is a controlled research prototype for studying computation/accuracy trade-offs on three synthetic binary-sequence tasks.
+ULGAN 1 is a 200,777-parameter recurrent neural model for studying
+adaptive computation on three synthetic binary-sequence tasks.
 
 ## Intended use
-
-- Reproducing the included synthetic benchmark.
-- Studying learned early stopping in a compact recurrent model.
-- Educational and exploratory research.
+- Research on adaptive computation and learned halting.
+- Reproduction of the included synthetic tasks.
+- Educational and exploratory experimentation.
 
 ## Out of scope
+ULGAN 1 is not a language model, chatbot, general-purpose reasoning
+system, autonomous agent or production decision system. Do not use it
+for medical, legal, financial, security or other consequential decisions.
 
-This checkpoint is not a language model, chatbot, general-purpose reasoning system, autonomous agent, or production-ready model. It must not be used for safety-critical, medical, legal, financial, or security decisions.
-
-## Inputs and outputs
-
-The model receives a non-empty binary sequence and a task identifier (`parity`, `majority`, or `last_bit`). It returns a binary prediction, the number of latent thinking steps, and cumulative halting probability.
+## Tasks
+- parity: odd number of ones.
+- majority: strictly more than half of the bits are ones.
+- last_bit: final input bit.
 
 ## Architecture
+Task-conditioned bidirectional GRU encoder, recurrent latent thinker,
+learned halting controller, prefix parity supervision and a density-aware
+feature for majority processing.
 
-A GRU encodes the sequence. A shared GRUCell performs up to eight latent updates. Task-specific heads produce binary logits, and a learned controller estimates when to halt. Training applies supervision at each latent step and an expected-step penalty.
+## Training
+Three independent seeds: 11, 23 and 42.
+256,000 training examples per seed.
+Maximum sequence length during training: 128.
+Maximum thinking steps: 12.
+Adaptive threshold used in reported inference: 0.95.
 
-## Data and evaluation
+## Evaluation
+Adaptive macro accuracy:
+- Seen lengths 1–128: 99.9889% mean, standard deviation 0.0192 percentage
+  points across seeds.
+- Unseen lengths 129–256: 99.7444% mean, standard deviation 0.1005
+  percentage points across seeds.
 
-Training data are generated synthetically online. The recorded reference run used seed 42, CPU, 8 epochs, 40 batches per epoch, batch size 128, and 40,960 presented examples. Evaluation used 500 examples per task and length range. Exact measurements are in `artifacts/benchmarks/v0.4/metrics.json`.
+The model is evaluated on synthetic data. These measurements do not
+establish performance on natural language or real-world data.
 
 ## Limitations
+Constructed edge cases can still fail. Fixed-step inference is materially
+worse than adaptive inference in the reported evaluation. Benchmark
+protocols differ from v0.4, so cross-version comparisons are descriptive.
 
-- Parity accuracy is weak; the model does not reliably learn this task.
-- Results are single-seed measurements without confidence intervals.
-- Only three synthetic tasks are covered.
-- Adaptive halting reduces latent steps but does not consistently improve accuracy.
-- Parameter count and checkpoint size are not equivalent to runtime memory or deployment cost.
-- No novelty, state-of-the-art, or general reasoning claim is made.
+## Checkpoints
+The three seed checkpoints are separate trained models, not an ensemble.
+Use one checkpoint at a time and report which seed was used.
+
+## License
+Apache-2.0, subject to the repository license.

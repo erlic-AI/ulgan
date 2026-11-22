@@ -1,0 +1,196 @@
+{
+  "name": "ulgan 1",
+  "seeds": [
+    42
+  ],
+  "settings": {
+    "seeds": [
+      42
+    ],
+    "epochs": 5,
+    "steps_per_epoch": 20,
+    "batch_size": 32,
+    "train_max_length": 128,
+    "eval_samples": 1024,
+    "ponder_weight": 0.0005,
+    "prefix_weight": 0.0,
+    "disable_prefix_supervision": false,
+    "causal_encoder": false,
+    "out": "artifacts/ulgan_1/extended_seed42"
+  },
+  "aggregate": {
+    "adaptive_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.7278645833333334,
+        "std": 0.0
+      },
+      "parity": {
+        "mean": 0.5,
+        "std": 0.0
+      },
+      "majority": {
+        "mean": 0.68359375,
+        "std": 0.0
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 1.8121744791666667,
+        "std": 0.0
+      }
+    },
+    "fixed12_seen_1_128": {
+      "macro_accuracy": {
+        "mean": 0.7037760416666666,
+        "std": 0.0
+      },
+      "parity": {
+        "mean": 0.4814453125,
+        "std": 0.0
+      },
+      "majority": {
+        "mean": 0.6298828125,
+        "std": 0.0
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    },
+    "adaptive_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6953125,
+        "std": 0.0
+      },
+      "parity": {
+        "mean": 0.4931640625,
+        "std": 0.0
+      },
+      "majority": {
+        "mean": 0.5927734375,
+        "std": 0.0
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "macro_mean_think_steps": {
+        "mean": 1.8092447916666667,
+        "std": 0.0
+      }
+    },
+    "fixed12_unseen_129_256": {
+      "macro_accuracy": {
+        "mean": 0.6848958333333334,
+        "std": 0.0
+      },
+      "parity": {
+        "mean": 0.4765625,
+        "std": 0.0
+      },
+      "majority": {
+        "mean": 0.578125,
+        "std": 0.0
+      },
+      "last_bit": {
+        "mean": 1.0,
+        "std": 0.0
+      }
+    }
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "parameters": 135977,
+      "train_examples": 3200,
+      "seconds": 26.424641370773315,
+      "history": [
+        {
+          "loss": 0.504043684899807,
+          "fixed_steps_accuracy": 0.4953125
+        },
+        {
+          "loss": 0.4138510152697563,
+          "fixed_steps_accuracy": 0.6796875
+        },
+        {
+          "loss": 0.41504627764225005,
+          "fixed_steps_accuracy": 0.634375
+        },
+        {
+          "loss": 0.37289153337478637,
+          "fixed_steps_accuracy": 0.7046875
+        },
+        {
+          "loss": 0.38466368466615675,
+          "fixed_steps_accuracy": 0.665625
+        }
+      ],
+      "adaptive_seen_1_128": {
+        "parity": {
+          "accuracy": 0.5,
+          "mean_think_steps": 1.5439453125
+        },
+        "majority": {
+          "accuracy": 0.68359375,
+          "mean_think_steps": 1.892578125
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 2.0
+        },
+        "macro_accuracy": 0.7278645833333334,
+        "macro_mean_think_steps": 1.8121744791666667
+      },
+      "fixed12_seen_1_128": {
+        "parity": {
+          "accuracy": 0.4814453125,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.6298828125,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.7037760416666666
+      },
+      "adaptive_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4931640625,
+          "mean_think_steps": 1.5361328125
+        },
+        "majority": {
+          "accuracy": 0.5927734375,
+          "mean_think_steps": 1.8916015625
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "mean_think_steps": 2.0
+        },
+        "macro_accuracy": 0.6953125,
+        "macro_mean_think_steps": 1.8092447916666667
+      },
+      "fixed12_unseen_129_256": {
+        "parity": {
+          "accuracy": 0.4765625,
+          "think_steps": 12
+        },
+        "majority": {
+          "accuracy": 0.578125,
+          "think_steps": 12
+        },
+        "last_bit": {
+          "accuracy": 1.0,
+          "think_steps": 12
+        },
+        "macro_accuracy": 0.6848958333333334
+      }
+    }
+  ]
+}
