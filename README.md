@@ -4,7 +4,7 @@
 
 ### Compact Adaptive Computation Research
 
-**Erlic AI · Independent AI Research**
+**erlic AI · Independent AI Research**
 
 [GitHub](https://github.com/erlic-AI/ulgan) ·
 [Releases](https://github.com/erlic-AI/ulgan/releases)
