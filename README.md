@@ -6,7 +6,7 @@
 
 **erlic AI · Independent AI Research**
 
-[GitHub](https://github.com/erlic-AI/ulgan) ·
+[Hugging Fce](https://github.com/erlic-AI/ulgan) ·
 [Releases](https://github.com/erlic-AI/ulgan/releases)
 
 **ULGAN 1.0.0 — First public release**
